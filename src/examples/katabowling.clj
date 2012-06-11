@@ -62,12 +62,14 @@
                            (registered-for-type :boolean)
                            (registered-for-type :string)
                            (list 'in_string
+                                 (tag-instruction-erc [:exec :integer] 1000)
+                                 (tagged-instruction-erc 1000)
                                  (fn [] (rand-int 10))
                                  (fn [] (rand-int 100))
                                  (fn [] (apply str (repeatedly (+ 1 (lrand-int 9))
                                                                #(rand-nth (str "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                                                                "abcdefghijklmnopqrstuvwxyz"
                                                                                "0123456789+-*/=")))))))
-  :population-size 2000
-  :max-generations 200
+  :population-size 1000
+  :max-generations 300
   :tournament-size 5)
