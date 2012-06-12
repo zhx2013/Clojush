@@ -42,6 +42,26 @@
   in_string
   (fn [state] (push-item (stack-ref :auxiliary 0 state) :string state)))
 
+;; If the top item ion the string stack is a single character that is a bowling character,
+;; return the equivalent integer. Otherwise, noop.
+(define-registered
+  string-bowling-atoi
+  (fn [state]
+    (if (empty? (:string state))
+      state
+      (let [top-string (stack-ref :string 0 state)]
+        (if (not (== (count top-string)
+                     1))
+          state
+          (if (not (some #{(first top-string)} "123456789-X/"))
+            state
+            (cond
+              (= "X" top-string) 10
+              (= "/" top-string) 10
+              (= "-" top-string) 0
+              true (Integer/parseInt top-string))))))))
+
+
 ;; Run PushGP on KataBowling
 (pushgp
   :error-function (fn [program]
@@ -69,7 +89,9 @@
                                  (fn [] (apply str (repeatedly (+ 1 (lrand-int 9))
                                                                #(rand-nth (str "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                                                                "abcdefghijklmnopqrstuvwxyz"
-                                                                               "0123456789+-*/=")))))))
+                                                                               "0123456789+-*/=")))))
+                                 (fn [] (str (rand-nth "123456789-X/")) ;;Bowling random character
+                                   )))
   :population-size 1000
   :max-generations 300
   :tournament-size 5)
