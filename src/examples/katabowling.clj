@@ -42,7 +42,7 @@
 ;; If the top item ion the string stack is a single character that is a bowling character,
 ;; return the equivalent integer. Otherwise, noop.
 (define-registered
-  string-bowling-atoi
+  string_bowling_atoi
   (fn [state]
     (if (empty? (:string state))
       state
@@ -132,8 +132,7 @@
                 'boolean_yankdup
                 'boolean_dup
                 'boolean_pop)
-          (list 'string-bowling-atoi
-                'string_pop
+          (list 'string_pop
                 'string_take
                 'string_eq
                 'string_stackdepth
@@ -146,8 +145,12 @@
                 'string_length
                 'string_concat
                 'string_shove
-                'string_dup)
+                'string_dup
+                'string_atoi
+                'string_reverse
+                'string_parse_to_chars)
           (list 'in_string
+                'string_bowling_atoi
                 (tag-instruction-erc [:exec :integer] 1000)
                 (tagged-instruction-erc 1000)
                 (fn [] (rand-int 10))
@@ -167,19 +170,19 @@
   :atom-generators kata-bowling-atom-generators
   :max-points 400
   :evalpush-limit 1000
-  :population-size 1000
+  :population-size 500
   :max-generations 300
   :tournament-size 5)
 
 
 ;; Test random individual
-(clojush/evaluate-individual (clojush/make-individual
+#_(clojush/evaluate-individual (clojush/make-individual
                                :program (clojush/random-code 150 kata-bowling-atom-generators))
                              kata-bowling-error-function
                              (new java.util.Random))
 
 ;; Test string-bowling-atoi
-(clojush/evaluate-individual
+#_(clojush/evaluate-individual
   (clojush/make-individual
     :program '("sad" string-bowling-atoi
                      "5ds+3" string-bowling-atoi
@@ -195,7 +198,7 @@
   kata-bowling-error-function
   (new java.util.Random))
 
-(run-push '("sad" string-bowling-atoi
+#_(run-push '("sad" string-bowling-atoi
                      "5ds+3" string-bowling-atoi
                      "832" string-bowling-atoi
                      "0" string-bowling-atoi
