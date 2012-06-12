@@ -33,10 +33,7 @@
    ["9-3561368153258-7181" 82]
    ["9-3/613/815/-/8-7/8/8" 131]
    ["X3/61XXX2/9-7/XXX" 193]])
-   
 
-(for [pair test-cases]
-  (vector (second pair) (first pair)))
 
 (define-registered 
   in_string
@@ -82,12 +79,75 @@
             10000))))))
 
 (def kata-bowling-atom-generators
-  (concat (registered-for-type :integer)
-          (registered-for-type :exec)
-          (registered-for-type :boolean)
-          (registered-for-type :string)
+  (concat (list 'integer_add
+                'integer_eq
+                'integer_swap
+                'integer_yank
+                'integer_dup
+                'integer_yankdup
+                'integer_lt
+                'integer_flush
+                'integer_shove
+                'integer_mult
+                'integer_stackdepth
+                'integer_div
+                'integer_gt
+                'integer_max
+                'integer_fromboolean
+                'integer_sub
+                'integer_mod
+                'integer_rot
+                'integer_min
+                'integer_pop)
+          (list 'exec_y
+                'exec_pop
+                'exec_eq
+                'exec_stackdepth
+                'exec_rot
+                'exec_when
+                'exec_do*times
+                'exec_do*count
+                'exec_s
+                'exec_do*range
+                'exec_if
+                'exec_k
+                'exec_yank
+                'exec_flush
+                'exec_yankdup
+                'exec_swap
+                'exec_dup
+                'exec_shove
+                'exec_noop)
+          (list 'boolean_swap
+                'boolean_eq
+                'boolean_yank
+                'boolean_flush
+                'boolean_rot
+                'boolean_and
+                'boolean_shove
+                'boolean_not
+                'boolean_or
+                'boolean_frominteger
+                'boolean_stackdepth
+                'boolean_yankdup
+                'boolean_dup
+                'boolean_pop)
+          (list 'string-bowling-atoi
+                'string_pop
+                'string_take
+                'string_eq
+                'string_stackdepth
+                'string_rot
+                'string_rand
+                'string_yank
+                'string_swap
+                'string_yankdup
+                'string_flush
+                'string_length
+                'string_concat
+                'string_shove
+                'string_dup)
           (list 'in_string
-                'string-bowling-atoi
                 (tag-instruction-erc [:exec :integer] 1000)
                 (tagged-instruction-erc 1000)
                 (fn [] (rand-int 10))
@@ -105,11 +165,11 @@
 (pushgp
   :error-function kata-bowling-error-function
   :atom-generators kata-bowling-atom-generators
+  :max-points 400
+  :evalpush-limit 1000
   :population-size 1000
   :max-generations 300
-  :tournament-size 5
-  :max-points 400
-  :evalpush-limit 1000)
+  :tournament-size 5)
 
 
 ;; Test random individual
