@@ -170,8 +170,8 @@
   :atom-generators kata-bowling-atom-generators
   :max-points 400
   :evalpush-limit 1000
-  :population-size 500
-  :max-generations 300
+  :population-size 2000
+  :max-generations 500
   :tournament-size 5)
 
 
