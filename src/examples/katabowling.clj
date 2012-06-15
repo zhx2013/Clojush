@@ -193,7 +193,14 @@
   :evalpush-limit 1000
   :population-size 2000
   :max-generations 500
-  :tournament-size 5)
+  :mutation-probability 0.1
+  :crossover-probability 0.8
+  :simplification-probability 0.05
+  :tournament-size 6
+  :trivial-geography-radius 10
+  :report-simplifications 50
+  :final-report-simplifications 1000
+  )
 
 
 ;; Test random individual
