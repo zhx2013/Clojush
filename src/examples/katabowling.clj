@@ -198,43 +198,10 @@
   :simplification-probability 0.05
   :tournament-size 6
   :trivial-geography-radius 10
-  :report-simplifications 50
+  :report-simplifications 0
   :final-report-simplifications 1000
   )
 
-
-;; Test random individual
-#_(clojush/evaluate-individual (clojush/make-individual
-                               :program (clojush/random-code 150 kata-bowling-atom-generators))
-                             kata-bowling-error-function
-                             (new java.util.Random))
-
-;; Test string-bowling-atoi
-#_(clojush/evaluate-individual
-  (clojush/make-individual
-    :program '("sad" string-bowling-atoi
-                     "5ds+3" string-bowling-atoi
-                     "832" string-bowling-atoi
-                     "0" string-bowling-atoi
-                     "5" string-bowling-atoi
-                     "1" string-bowling-atoi
-                     "9" string-bowling-atoi
-                     "X" string-bowling-atoi
-                     "/" string-bowling-atoi
-                     "-" string-bowling-atoi)
-    )
-  kata-bowling-error-function
-  (new java.util.Random))
-
-#_(run-push '("sad" string-bowling-atoi
-                     "5ds+3" string-bowling-atoi
-                     "832" string-bowling-atoi
-                     "0" string-bowling-atoi
-                     "A" string-bowling-atoi
-                     "5" string-bowling-atoi
-                     "1" string-bowling-atoi
-                     "9" string-bowling-atoi
-                     "X" string-bowling-atoi
-                     "/" string-bowling-atoi
-                     "-" string-bowling-atoi)
-          (make-push-state))
+;; Use the following if running in lein
+(do (flush)
+    (System/exit 0))
