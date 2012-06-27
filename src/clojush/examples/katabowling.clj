@@ -1,5 +1,9 @@
-(ns examples.katabowling
-  (:use [clojush]
+(ns clojush.examples.katabowling
+  (:use [clojush.pushgp.pushgp]
+        [clojush.pushstate]
+        [clojush.interpreter]
+        [clojush.random]
+        [clojush.instructions.tag]
         [clojure.math.numeric-tower]))
 
 (def test-cases
