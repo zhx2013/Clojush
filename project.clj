@@ -1,4 +1,4 @@
-(defproject clojush "1.1.4"
+(defproject clojush "1.2.0"
             :description "The Push programming language and the PushGP genetic programming
                           system implemented in Clojure. 
                           See http://hampshire.edu/lspector/push.html"
@@ -6,4 +6,4 @@
                            [org.clojure/math.numeric-tower "0.0.1"]   
                            [local-file "0.0.4"]]
 	    :jvm-opts ["-Xmx500m"]
-            :main clojush)
+            :main clojush.clojush)
