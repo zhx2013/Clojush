@@ -194,7 +194,3 @@
   :report-simplifications 0
   :final-report-simplifications 1000
   )
-
-;; Use the following if running in lein
-(do (flush)
-    (System/exit 0))

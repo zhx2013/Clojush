@@ -233,7 +233,3 @@
   :final-report-simplifications 1000
   :use-fast-lexicase-selection true
   )
-
-;; Use the following if running in lein
-(do (flush)
-    (System/exit 0))
