@@ -1,2 +1,7 @@
 *~
 classes/*
+results/*
+.lein-deps-sum
+launcher.py
+backup_launcher.py
+run_launcher.py
