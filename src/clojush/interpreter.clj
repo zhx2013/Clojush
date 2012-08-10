@@ -7,14 +7,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; push interpreter
 
+(def literals
+     (atom
+      {:integer integer?
+       :number float?
+       :string string?
+       :boolean (fn [thing] (or (= thing true) (= thing false)))
+       }))
+
 (defn recognize-literal
   "If thing is a literal, return its type -- otherwise return false."
   [thing]
-  (cond (integer? thing) :integer
-        (number? thing) :float
-        (string? thing) :string
-        (or (= thing true) (= thing false)) :boolean
-        true false))
+  (loop [m (seq @literals)]
+    (if-let [[type pred] (first m)]
+      (if (pred thing) type
+          (recur (rest m))))))
+
+;; Add new literals by just assoc'ing on the new predicate. e.g.:
+;; (swap! literals :symbol symbol?)
 
 (def debug-recent-instructions ())
 
@@ -31,7 +41,10 @@
         literal-type (push-item instruction literal-type state)
         (tag-instruction? instruction) (handle-tag-instruction instruction state)
         (tagged-code-macro? instruction) (handle-tag-code-macro instruction state)
-        :else ((instruction @instruction-table) state)))))
+	(contains? @instruction-table instruction) ((instruction @instruction-table) state)
+        :else (binding [*out* *err*]
+		(println "Undefined instruction:" instruction)
+		state)))))
 
 (defn eval-push 
   "Executes the contents of the exec stack, aborting prematurely if execution limits are 
@@ -40,6 +53,8 @@ normal, or :abnormal otherwise."
   ([state] (eval-push state false false))
   ([state print] (eval-push state print false))
   ([state print trace]
+     (when (empty? @global-atom-generators)
+       (println "global-atom-generators is empty. You should do something like: (reset! global-atom-generators '(exec_if boolean_not true false))"))
     (loop [iteration 1 s state
            time-limit (if (zero? @global-evalpush-time-limit)
                         0
