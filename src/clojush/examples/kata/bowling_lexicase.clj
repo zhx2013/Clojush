@@ -134,12 +134,12 @@
   (concat (list 'integer_add
                 'integer_eq
                 'integer_swap
-                'integer_yank
+                ;'integer_yank
                 'integer_dup
-                'integer_yankdup
+                ;'integer_yankdup
                 'integer_lt
-                'integer_flush
-                'integer_shove
+                ;'integer_flush
+                ;'integer_shove
                 'integer_mult
                 'integer_stackdepth
                 'integer_div
@@ -150,7 +150,8 @@
                 'integer_mod
                 'integer_rot
                 'integer_min
-                'integer_pop)
+                ;'integer_pop
+                )
           (list 'exec_y
                 'exec_pop
                 'exec_eq
@@ -164,36 +165,37 @@
                 'exec_if
                 'exec_k
                 'exec_yank
-                'exec_flush
+                ;'exec_flush
                 'exec_yankdup
                 'exec_swap
                 'exec_dup
                 'exec_shove
-                'exec_noop)
+                ;'exec_noop
+                )
           (list 'boolean_swap
                 'boolean_eq
-                'boolean_yank
-                'boolean_flush
+                ;'boolean_yank
+                ;'boolean_flush
                 'boolean_rot
                 'boolean_and
-                'boolean_shove
+                ;'boolean_shove
                 'boolean_not
                 'boolean_or
                 'boolean_frominteger
                 'boolean_stackdepth
-                'boolean_yankdup
+                ;'boolean_yankdup
                 'boolean_dup
-                'boolean_pop)
-          (list 'string_pop
+                ;'boolean_pop
+                )
+          (list ;'string_pop
                 'string_take
                 'string_eq
                 'string_stackdepth
                 'string_rot
-                'string_rand
-                'string_yank
+                ;'string_yank
                 'string_swap
-                'string_yankdup
-                'string_flush
+                ;'string_yankdup
+                ;'string_flush
                 'string_length
                 'string_concat
                 'string_shove
@@ -207,10 +209,10 @@
                 (tagged-instruction-erc 1000)
                 (fn [] (rand-int 10))
                 (fn [] (rand-int 100))
-                (fn [] (apply str (repeatedly (+ 1 (lrand-int 9))
-                                              #(rand-nth (str "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                                              "abcdefghijklmnopqrstuvwxyz"
-                                                              "0123456789+-*/=")))))
+                ;(fn [] (apply str (repeatedly (+ 1 (lrand-int 9))
+                ;                              #(rand-nth (str "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                ;                                              "abcdefghijklmnopqrstuvwxyz"
+                ;                                              "0123456789+-*/=")))))
                 (fn [] (str (rand-nth "123456789-X/")) ;;Bowling random character
                   ))))
 
@@ -222,7 +224,7 @@
   :atom-generators kata-bowling-atom-generators
   :max-points 400
   :evalpush-limit 1000
-  :population-size 2000
+  :population-size 10000
   :max-generations 500
   :mutation-probability 0.1
   :crossover-probability 0.8
