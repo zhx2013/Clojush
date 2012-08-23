@@ -219,7 +219,7 @@
 ;;;;;;;;;;
 ;; Run PushGP on KataBowling
 
-(pushgp
+#_(pushgp
   :error-function kata-bowling-error-function
   :atom-generators kata-bowling-atom-generators
   :max-points 400
