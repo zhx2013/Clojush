@@ -134,12 +134,12 @@
   (concat (list 'integer_add
                 'integer_eq
                 'integer_swap
-                ;'integer_yank
+                'integer_yank
                 'integer_dup
-                ;'integer_yankdup
+                'integer_yankdup
                 'integer_lt
                 ;'integer_flush
-                ;'integer_shove
+                'integer_shove
                 'integer_mult
                 'integer_stackdepth
                 'integer_div
@@ -192,9 +192,9 @@
                 'string_eq
                 'string_stackdepth
                 'string_rot
-                ;'string_yank
+                'string_yank
                 'string_swap
-                ;'string_yankdup
+                'string_yankdup
                 ;'string_flush
                 'string_length
                 'string_concat
