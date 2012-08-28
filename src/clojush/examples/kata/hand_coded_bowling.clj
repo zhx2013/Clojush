@@ -5,64 +5,48 @@
         [clojush.globals]
         [clojush.interpreter]
         [clojush.pushstate]
-        ;[clojush.pushgp.pushgp]
-        ;[clojush.pushstate]
-        ;[clojush.interpreter]
-        ;[clojush.random]
-        ;[clojush.instructions.tag]
-        ;[clojure.math.numeric-tower]
         ))
 
 
 (reset! global-atom-generators kata-bowling-atom-generators)
+;(reset! global-evalpush-limit 400)
+(reset! global-evalpush-limit 5000)
 
-(def program
+
+(def bowling-program
   '(string_parse_to_chars
      (tag_exec_100 (string_bowling_atoi integer_add)) ;; The regular add up
-     (tag_exec_200 (tagged_100 string_dup tagged_100)) ;; The spare code
-     (tag_exec_300 (tagged_100 string_dup tagged_100
-                    string_swap string_dup tagged_100
-                    string_swap)) ;; The Strike code
+     (tag_exec_200 (string_pop tagged_100 string_dup tagged_100)) ;; The spare (frame) code
+     (tag_exec_300 (tagged_100 ; Add in 10 and remove X
+                    tagged_800 ; IsSpare? If true, add 10, else, add next 2
+                    exec_if (10 integer_add)
+                            (string_dup tagged_100
+                             string_swap string_dup tagged_100
+                             string_swap)
+                               )) ;; The Strike code
+     (tag_exec_700 (string_dup "X" string_eq)) ;;IsStrike?
      (tag_exec_800 (1 string_yankdup "/" string_eq)) ;;IsSpare? (returns True if current frame results in spare)
-     (tag_exec_900 (string_pop)) ;; Pop code (for if the next bowl is spare)
-     tagged_300 tagged_800 ;tagged_900 ;tagged_200 tagged_100 tagged_100 tagged_300
-     ;tagged_100 ;tagged_100 tagged_100 tagged_200 tagged_100 tagged_100
-     ;tagged_300 tagged_300 tagged_300  ;; Main code block
+     (tag_exec_900 (string_pop)) ;; Pop string (for if the next bowl is spare)
+     (tag_exec_400 ;;Frame function
+       (tagged_700
+         exec_if (tagged_300)
+                 (tagged_800
+                   exec_if (tagged_200)
+                           (tagged_100 tagged_100))))
+     (10 exec_do*times tagged_400) ;;Do frame function 10 times
      )
   )
 
 (let [input "X7/9-X-88/-6XXX81"
       output 167
-      ;program '(5 10 15 integer_add integer_sub)
       ]
-  (run-push program
+  (run-push bowling-program
             (push-item input :auxiliary
                        (push-item input :string
                                   (make-push-state)))))
 
-"X528" -> "528", integer stack + 10 + 5 + 2
-          "258", integer stack + 10 + 5 + 2
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#_(evaluate-individual (make-individual :program program)
+(evaluate-individual (make-individual :program bowling-program)
                      kata-bowling-error-function
                      (new java.util.Random))
-
-;X = 20
-;7 = -- TURNS INTO SPARE
-;/ = 39
-;9 = 48
-;- = 48
-;X = 66
-;- = 66
-;8 = 74
-;8 = -- TURNS INTO SPARE
-;/ = 84
-;- = 84
-;6 = 90
-;X = 120
-;X = 148
-;X = 167
-;8 = -- LAST STRIKE
-;1 = -- LAST STRIKE
-
-
