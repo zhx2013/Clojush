@@ -1,5 +1,5 @@
 (ns clojush.examples.kata.hand-coded-bowling
-  (:use [clojush.examples.kata.bowling]
+  (:use [clojush.examples.kata.bowling-helper]
         [clojush.evaluate]
         [clojush.individual]
         [clojush.globals]
@@ -9,8 +9,8 @@
 
 
 (reset! global-atom-generators kata-bowling-atom-generators)
-;(reset! global-evalpush-limit 400)
-(reset! global-evalpush-limit 5000)
+
+(reset! global-evalpush-limit 2000)
 
 
 (def bowling-program
@@ -37,7 +37,7 @@
      )
   )
 
-(let [input "X7/9-X-88/-6XXX81"
+#_(let [input "X7/9-X-88/-6XXX81"
       output 167
       ]
   (run-push bowling-program
