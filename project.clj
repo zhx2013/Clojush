@@ -5,5 +5,5 @@
             :dependencies [[org.clojure/clojure "1.3.0"]
                            [org.clojure/math.numeric-tower "0.0.1"]   
                            [local-file "0.0.4"]]
-	    :jvm-opts ["-Xmx500m"]
+	    :jvm-opts ["-Xmx2g"]
             :main clojush.core)
