@@ -1,7 +1,10 @@
 *~
+.#*
 classes/*
 results/*
+target/*
 .lein-deps-sum
 launcher.py
 backup_launcher.py
 run_launcher.py
+best_fitnesses_of_runs.py
