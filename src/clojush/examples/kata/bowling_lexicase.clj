@@ -15,8 +15,6 @@
   :mutation-probability 0.1
   :crossover-probability 0.8
   :simplification-probability 0.05
-  :tournament-size 6
-  :trivial-geography-radius 10
   :node-selection-method :size-tournament
   :node-selection-tournament-size 2
   :report-simplifications 0

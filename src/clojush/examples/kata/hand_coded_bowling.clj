@@ -50,3 +50,33 @@
 (evaluate-individual (make-individual :program bowling-program)
                      kata-bowling-error-function
                      (new java.util.Random))
+
+
+;Enumerate test cases based on strike, spare, both, and none
+(def test-cases-type
+  (map-indexed #(vector %1 %2 (if (some #{\X} (first %2))
+                                (if (some #{\/} (first %2))
+                                  :both
+                                  :strike)
+                                (if (some #{\/} (first %2))
+                                  :spare
+                                  :none)))
+               test-cases))
+
+(defn get-test-cases-type
+  [type]
+  (filter #(= (nth % 2) type) test-cases-type))
+
+(defn get-test-cases-type-numbers
+  [type]
+  (map first (get-test-cases-type type)))
+
+(defn Rify-column-names
+  [type]
+  (println (str "(TC"
+                (apply str (interpose ", TC" (get-test-cases-type-numbers type)))
+                ")")))
+
+(get-test-cases-type-numbers :both)
+
+(Rify-column-names :spare)
