@@ -8,11 +8,13 @@
 (pushgp
   :error-function kata-bowling-error-function
   :atom-generators kata-bowling-atom-generators
-  :max-points 1000
-  :evalpush-limit 2000
-  :population-size 10000
-  :max-generations 500
+  :max-points 2500
+  :max-points-in-initial-program 250
+  :evalpush-limit 3000
+  :population-size 5000
+  :max-generations 400
   :mutation-probability 0.1
+  :mutation-max-points 10
   :crossover-probability 0.8
   :simplification-probability 0.05
   :node-selection-method :size-tournament

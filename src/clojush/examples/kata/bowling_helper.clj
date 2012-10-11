@@ -278,10 +278,11 @@
                 'string_parse_to_chars)
           (list 'in_string
                 'string_bowling_atoi
-                (tag-instruction-erc [:exec :integer] 1000)
+                (tag-instruction-erc [:exec :integer :string] 1000)
                 (tagged-instruction-erc 1000)
                 (fn [] (rand-int 10))
                 (fn [] (rand-int 100))
+                (fn [] (rand-nth [true false]))
                 ;(fn [] (apply str (repeatedly (+ 1 (lrand-int 9))
                 ;                              #(rand-nth (str "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 ;                                              "abcdefghijklmnopqrstuvwxyz"
