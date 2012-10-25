@@ -1,4 +1,4 @@
-(ns clojush.examples.kata.boo
+(ns clojush.examples.kata.stats-bowling
   (:use [clojush.pushgp.pushgp]
         [clojush.examples.kata.bowling-helper]))
 
