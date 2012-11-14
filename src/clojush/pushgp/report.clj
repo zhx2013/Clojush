@@ -162,7 +162,6 @@
         (println "Median copy number: " (nth (sort (vals frequency-map)) (Math/floor (/ (count frequency-map) 2)))))
       (printf "\n;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n\n")
       (flush)
-      (println print-csv-logs print-json-logs)
       (when print-csv-logs (csv-print population generation csv-log-filename
                                       log-fitnesses-for-all-cases))
       (when print-json-logs (json-print population generation json-log-filename
