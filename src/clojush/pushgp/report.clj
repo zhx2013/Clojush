@@ -116,16 +116,19 @@
 (defn report 
   "Reports on the specified generation of a pushgp run. Returns the best
    individual of the generation."
+  ([population generation error-function report-simplifications]
+    (report population generation error-function report-simplifications default-problem-specific-report
+            nil nil nil nil
+            nil nil))
   ([population generation error-function report-simplifications
     print-csv-logs print-json-logs csv-log-filename json-log-filename
     log-fitnesses-for-all-cases json-log-program-strings]
-    (report population generation error-function report-simplifications
+    (report population generation error-function report-simplifications default-problem-specific-report
             print-csv-logs print-json-logs csv-log-filename json-log-filename
-            log-fitnesses-for-all-cases json-log-program-strings
-            default-problem-specific-report))
-  ([population generation error-function report-simplifications
+            log-fitnesses-for-all-cases json-log-program-strings))
+  ([population generation error-function report-simplifications problem-specific-report
     print-csv-logs print-json-logs csv-log-filename json-log-filename
-    log-fitnesses-for-all-cases json-log-program-strings problem-specific-report]
+    log-fitnesses-for-all-cases json-log-program-strings]
     (printf "\n\n;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;")(flush)
     ;(println (map :total-error population))(flush) ;***
     (printf "\n;; -*- Report at generation %s" generation)(flush)
@@ -159,6 +162,7 @@
         (println "Median copy number: " (nth (sort (vals frequency-map)) (Math/floor (/ (count frequency-map) 2)))))
       (printf "\n;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n\n")
       (flush)
+      (println print-csv-logs print-json-logs)
       (when print-csv-logs (csv-print population generation csv-log-filename
                                       log-fitnesses-for-all-cases))
       (when print-json-logs (json-print population generation json-log-filename
