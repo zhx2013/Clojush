@@ -7,5 +7,5 @@
                            [local-file "0.0.4"]
                            [clojure-csv "2.0.0-alpha2"]
                            [org.clojure/data.json "0.1.3"]]
-	    :jvm-opts ["-Xmx2g"]
+            :jvm-opts ["-Xmx4g" "-XX:+UseParallelGC"]
             :main clojush.core)
