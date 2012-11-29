@@ -4,7 +4,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Enumerate test cases based on strike, spare, both, and none
-(def test-cases-type
+(defn test-cases-type
+  [tcs]
   (map-indexed #(vector %1 %2 (if (some #{\X} (first %2))
                                 (if (some #{\/} (first %2))
                                   :both
@@ -12,23 +13,26 @@
                                 (if (some #{\/} (first %2))
                                   :spare
                                   :none)))
-               test-cases))
+               tcs))
 
 (defn get-test-cases-type
-  [type]
-  (filter #(= (nth % 2) type) test-cases-type))
+  [type tcs]
+  (filter #(= (nth % 2) type) (test-cases-type tcs)))
 
 (defn get-test-cases-type-numbers
-  [type]
-  (map first (get-test-cases-type type)))
+  [type tcs]
+  (map first (get-test-cases-type type tcs)))
+
+
+(count (get-test-cases-type-numbers :strike test-cases))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn Rify-column-names
   [type]
   (println (str "(TC"
                 (apply str (interpose ", TC" (get-test-cases-type-numbers type)))
                 ")")))
-
-;(count (get-test-cases-type-numbers :strike))
 
 ;(Rify-column-names :spare)
 

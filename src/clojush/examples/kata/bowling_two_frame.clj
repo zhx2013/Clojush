@@ -1,4 +1,4 @@
-(ns clojush.examples.kata.bowling
+(ns clojush.examples.kata.bowling-two-frame
   (:use [clojush.pushgp.pushgp]
         [clojush.examples.kata.bowling-helper]))
 
@@ -6,7 +6,7 @@
 ;; Run PushGP on KataBowling
 
 (pushgp
-  :error-function (kata-bowling-error-functioner test-cases)
+  :error-function (kata-bowling-error-functioner two-frame-test-cases)
   :atom-generators kata-bowling-atom-generators
   :max-points 2500
   :max-points-in-initial-program 250

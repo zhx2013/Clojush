@@ -50,7 +50,7 @@
 
 
 (evaluate-individual (make-individual :program bowling-program)
-                     kata-bowling-error-function
+                     (kata-bowling-error-functioner test-cases)
                      (new java.util.Random))
 
 
@@ -62,7 +62,7 @@
   )
 
 (evaluate-individual (make-individual :program evolved-bowling-program)
-                     kata-bowling-error-function
+                     (kata-bowling-error-functioner test-cases)
                      (new java.util.Random))
 
 (count-points evolved-bowling-program)

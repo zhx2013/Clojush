@@ -154,6 +154,58 @@
    ["-9-9-9-9-9-9-9-9-9-8" 89]
    ["9-9-9-9-9-9-9-9-9-9-" 90]])
 
+(def two-frame-test-cases
+  [["----" 0]
+   ["-11-" 2]
+   ["--2-" 2]
+   ["1212" 6]
+   ["3--3" 6]
+   ["-135" 9]
+   ["1314" 9]
+   ["2251" 10]
+   ["532-" 10]
+   ["4-33" 10]
+   ["---/-" 10]
+   ["8/--" 10]
+   ["X--" 10]
+   ["63-2" 11]
+   ["-654" 15]
+   ["3318" 15]
+   ["7-53" 15]
+   ["4444" 16]
+   ["-925" 16]
+   ["X12" 16]
+   ["-8-9" 17]
+   ["449-" 17]
+   ["7/23" 17]
+   ["-/-7" 17]
+   ["9-9-" 18]
+   ["549-" 18]
+   ["-/-/-" 20]
+   ["53-/3" 21]
+   ["X42" 22]
+   ["-3X9/" 23]
+   ["534/6" 24]
+   ["4/62" 24]
+   ["X7-" 24]
+   ["72X51" 25]
+   ["7/8-" 26]
+   ["52X36" 26]
+   ["X-/-" 30]
+   ["6/7/4" 31]
+   ["X4/2" 32]
+   ["X4/2" 32]
+   ["-4XXX" 34]
+   ["17XX9" 37]
+   ["3/X71" 38]
+   ["7/X35" 38]
+   ["2/X3/" 40]
+   ["6/XX2" 42]
+   ["XX7/" 47]
+   ["4/XXX" 50]
+   ["XXX4" 54]
+   ["XXXX" 60]])
+
 ;;;;;;;;;;;;
 ;; Define new instructions
 
@@ -185,25 +237,11 @@
 ;;;;;;;;;;
 ;; Define error functions
 
-(def kata-bowling-error-function
+(defn kata-bowling-error-functioner
+  [tcs]
   (fn [program]
     (doall
-      (for [test-case test-cases]
-        (let [input (first test-case)
-              output (second test-case)
-              state (run-push program 
-                              (push-item input :auxiliary 
-                                         (push-item input :string 
-                                                    (make-push-state))))
-              top-int (top-item :integer state)]
-          (if (number? top-int)
-            (abs (- output top-int))
-            10000))))))
-
-(def kata-bowling-easy-error-function
-  (fn [program]
-    (doall
-      (for [test-case easy-test-cases]
+      (for [test-case tcs]
         (let [input (first test-case)
               output (second test-case)
               state (run-push program 

@@ -6,7 +6,7 @@
 ;; Run PushGP on KataBowling
 
 (pushgp
-  :error-function kata-bowling-error-function
+  :error-function (kata-bowling-error-functioner test-cases)
   :atom-generators kata-bowling-atom-generators
   :max-points 2500
   :max-points-in-initial-program 250
