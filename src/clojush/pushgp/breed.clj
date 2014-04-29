@@ -9,28 +9,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; genetic operators
 
-(defn breed
-  "The new breed function will do
-  30% tourney-breeding
-  70% lexicase-breeding"
-  [agt location rand-gen population
-   {:keys [;; genetic operator probabilities
-           mutation-probability crossover-probability simplification-probability
-           gaussian-mutation-probability boolean-gsxover-probability
-           deletion-mutation-probability parentheses-addition-mutation-probability
-           tagging-mutation-probability tag-branch-mutation-probability
-           ultra-probability
-           ;; Used by select
-           tournament-size trivial-geography-radius
-           ;; Used by simplification
-           error-function reproduction-simplifications maintain-ancestors
-           ]
-    :as argmap}]
-    (random/with-rng rand-gen
-      (let [i (lrand)]
-	(if (< i 0.3)
-	  (breed-tourney agt location rand-gen population argmap)
-	  (breed-lexicase agt location rand-gen population argmap)))))
+
 
 (defn breed-tourney
   "This breed function would select parents with Tourney selection"
@@ -177,3 +156,27 @@
           true
           parent)
         :parent parent))))
+        
+        
+(defn breed
+  "The new breed function will do
+  30% tourney-breeding
+  70% lexicase-breeding"
+  [agt location rand-gen population
+   {:keys [;; genetic operator probabilities
+           mutation-probability crossover-probability simplification-probability
+           gaussian-mutation-probability boolean-gsxover-probability
+           deletion-mutation-probability parentheses-addition-mutation-probability
+           tagging-mutation-probability tag-branch-mutation-probability
+           ultra-probability
+           ;; Used by select
+           tournament-size trivial-geography-radius
+           ;; Used by simplification
+           error-function reproduction-simplifications maintain-ancestors
+           ]
+    :as argmap}]
+    (random/with-rng rand-gen
+      (let [i (lrand)]
+	(if (< i 0.3)
+	  (breed-tourney agt location rand-gen population argmap)
+	  (breed-lexicase agt location rand-gen population argmap)))))
