@@ -29,9 +29,9 @@
     :as argmap}]
     (random/with-rng rand-gen
       (let [i (lrand)]
-	(if (< n 0.1)
+	(if (< i 0.1)
 	  (breed-interracial agt location rand-gen population argmap)
-	  (if (< n 0.3)
+	  (if (< i 0.3)
 	  (breed-tourney agt location rand-gen population argmap)
 	  (breed-lexicase agt location rand-gen population argmap))))))
 
