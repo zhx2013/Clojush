@@ -27,7 +27,7 @@
     :as argmap}]
   (random/with-rng rand-gen
     (let [n (lrand)
-          parent (select population location argmap)]
+          parent (select-tourney population location argmap)]
       (assoc
         (cond
           ;; mutation
@@ -76,7 +76,7 @@
                   deletion-mutation-probability parentheses-addition-mutation-probability
                   tagging-mutation-probability tag-branch-mutation-probability
                   ultra-probability))
-          (let [second-parent (select population location argmap)]
+          (let [second-parent (select-lexicase population location argmap)]
             (ultra parent second-parent argmap))
           ;; replication
           true
