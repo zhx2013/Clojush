@@ -35,7 +35,7 @@
           (mutate parent argmap)
           ;; crossover
           (< n (+ mutation-probability crossover-probability))
-          (let [second-parent (select population location argmap)]
+          (let [second-parent (select-lexicase population location argmap)]
             (crossover parent second-parent argmap))
           ;; simplification
           (< n (+ mutation-probability crossover-probability simplification-probability))
@@ -47,7 +47,7 @@
           ;; boolean gsxover
           (< n (+ mutation-probability crossover-probability simplification-probability 
                   gaussian-mutation-probability boolean-gsxover-probability))
-          (let [second-parent (select population location argmap)]
+          (let [second-parent (select-lexicase population location argmap)]
             (boolean-gsxover parent second-parent argmap))
           ;; deletion mutation
           (< n (+ mutation-probability crossover-probability simplification-probability 
