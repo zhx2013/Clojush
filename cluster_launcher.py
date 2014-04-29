@@ -4,7 +4,7 @@ import os, stat
 # Settings
 number_runs = 10
 
-clojush_directory = "/home/hz12/cosel/"
+clojush_directory = "/home/hz12/cointer/"
 output_directory = "../Results/odd/"
 
 example_file = "clojush.examples.odd"
