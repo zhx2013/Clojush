@@ -9,31 +9,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; genetic operators
 
-(defn breed
-  "The new breed function will do
-  10% interracial-breeding
-  20% Tourney-breeding
-  70% Lexicase-breeding"
-  [agt location rand-gen population
-   {:keys [;; genetic operator probabilities
-           mutation-probability crossover-probability simplification-probability
-           gaussian-mutation-probability boolean-gsxover-probability
-           deletion-mutation-probability parentheses-addition-mutation-probability
-           tagging-mutation-probability tag-branch-mutation-probability
-           ultra-probability
-           ;; Used by select
-           tournament-size trivial-geography-radius
-           ;; Used by simplification
-           error-function reproduction-simplifications maintain-ancestors
-           ]
-    :as argmap}]
-    (random/with-rng rand-gen
-      (let [i (lrand)]
-	(if (< i 0.1)
-	  (breed-interracial agt location rand-gen population argmap)
-	  (if (< i 0.3)
-	  (breed-tourney agt location rand-gen population argmap)
-	  (breed-lexicase agt location rand-gen population argmap))))))
 
 (defn breed-tourney
   "This breed function would select parents with Tourney selection"
@@ -253,3 +228,29 @@
           true
           parent)
         :parent parent))))
+        
+(defn breed
+  "The new breed function will do
+  10% interracial-breeding
+  20% Tourney-breeding
+  70% Lexicase-breeding"
+  [agt location rand-gen population
+   {:keys [;; genetic operator probabilities
+           mutation-probability crossover-probability simplification-probability
+           gaussian-mutation-probability boolean-gsxover-probability
+           deletion-mutation-probability parentheses-addition-mutation-probability
+           tagging-mutation-probability tag-branch-mutation-probability
+           ultra-probability
+           ;; Used by select
+           tournament-size trivial-geography-radius
+           ;; Used by simplification
+           error-function reproduction-simplifications maintain-ancestors
+           ]
+    :as argmap}]
+    (random/with-rng rand-gen
+      (let [i (lrand)]
+	(if (< i 0.1)
+	  (breed-interracial agt location rand-gen population argmap)
+	  (if (< i 0.3)
+	  (breed-tourney agt location rand-gen population argmap)
+	  (breed-lexicase agt location rand-gen population argmap))))))
