@@ -96,11 +96,13 @@
    :evalpush-limit 500
    :population-size 1000
    :max-generations 1000
-   :mutation-probability 0.10
-   :mutation-max-points 50
-   :crossover-probability 0.80
+   :mutation-probability 0.0
+   :crossover-probability 0.00
+   :reproduction-probability 0.0
    :simplification-probability 0.0
+   :ultra-probability 1.0
    :tournament-size 7
+   :use-lexicase-selection true
    :reuse-errors true ;; If a sample set is used, then error reuse must be disabled
    :print-errors false
    :problem-specific-report problem-specific-report
